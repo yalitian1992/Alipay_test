@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>获取微积分</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compitable" content="IE=edge">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    .calculusBox { 
+      max-width: 640px; 
+      margin: 0 auto 56px; 
+    }
+    .header{
+      width: 100%; 
+      height: 44px;
+      background:#ccc;
+      position: relative;
+    }
+    .header > img { 
+      position: absolute;
+      top: 13px;
+      left: 10px;
+      z-index: 1;
+      height: 18px;
+      transform:rotate(180deg);
+      -ms-transform:rotate(180deg);   /* IE 9 */
+      -moz-transform:rotate(180deg);  /* Firefox */
+      -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+      -o-transform:rotate(180deg);   
+    }
+    .header > p{ 
+      text-align: center; 
+      font-size: 16px;
+      line-height: 44px;
+    }
+    .calculusBox .proInfo{
+      padding: 10px;
+      background: #eee;
+      overflow: hidden;
+    }
+    .calculusBox .proInfo img{
+      width: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+    .calculusBox .proPrice{
+      text-align: center;
+    }
+    .calculusBox .color-red {
+      color: #ed3f45 ;
+    }
+    .calculusBox .proInfo p:nth-child(3){
+      line-height: 32px;
+    }
+    .calculusBox .proInfo p:last-child{
+      text-align: right;
+    }
+    .calculusBox .Rec-box>p {
+      height: 16px;
+      color: #9d91b5;
+      font-size: 18px;
+      font-weight: inherit;
+      padding: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .calculusBox .Rec-money-list {
+      padding: 6px 20px 20px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .calculusBox .Rec-money-list>li {
+      margin-top: 14px;
+      width: 98px;
+      height: 40px;
+      font-size: 16px;
+      color: #000;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 5px;
+      border: 2px solid #9d91b5;
+    }
+    .calculusBox .other-amount {
+      position: relative;
+    }
+    .calculusBox .other-amount input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 98px;
+      height: 40px;
+      font-size: 16px;
+      text-align: center;
+      background: rgba(255,255,255,0);
+    }
+    .calculusBox .Rec-money-list>li.active {
+      border: none;
+      background: #e0dcff;
+      border: 2px solid #e0dcff;
+      color: #433a57;
+
+    }
+    .calculusBox .sumShow{
+      padding: 10px;
+      overflow: hidden;
+      background: #ccc;
+    }
+    .calculusBox .sumShow p:nth-child(1),.sumShow p:nth-child(2){
+      float: left;
+      width: 50%;
+    }
+    .calculusBox .sumShow p:nth-child(2){
+      text-align: right;
+    }
+    .calculusBox .pay-bottomBox{ 
+      position: fixed;  
+      bottom: 0;
+      left: 0;
+      height: 56px;
+      line-height: 56px;
+      width: 100%;
+      z-index: 1;
+    }
+    .calculusBox .pay-bottom{
+      padding-left:0px;
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ccc;
+      overflow: hidden;
+      text-align: center;
+    }
+    .calculusBox .pay-bottom button{
+      background: #ed3f45;
+      height: 36px;
+      line-height: 36px;
+      width: 60%;
+      border-radius:20px;
+      color: #fff;
+      font-size: 16px;
+      float: none;
+    }
+    @media screen and (max-width: 359px) and (min-width: 320px){
+      .calculusBox .Rec-money-list>li {
+        border-width: 1px;
+      }
+      .calculusBox .Rec-money-list>li,.calculusBox .other-amount input,.calculusBox .other-amount input::-webkit-input-placeholder {
+        font-size: 14px;
+      }
+      .calculusBox .Rec-money-list>li,.calculusBox .other-amount input {
+        width: 75px;
+        height: 32px;
+        line-height: 32px;
+      }
+      .calculusBox .Rec-money-list>li.active{
+        border-width: 1px;
+      }
+    }
+</style>
+<body>
+  <div class="calculusBox">
+    <div class="header">
+      <img src="images/icon-Arrow.png" alt="">
+      <p>获取微积分</p>
+    </div>
+    <div class="calculusMain">
+      <div class="proInfo">
+        <img src="images/pro.jpg" alt="">
+        <p class="proPrice">价格：<span class="color-red">100</span></p>
+        <p>商品介绍</p>
+        <p>优众网专属优惠券，购买优众网商品时使用，可抵扣10元。（团购、折扣商品不可使用）。</p>
+        <p>每张赠送<span class="color-red">100</span>微积分</p>
+      </div>
+      <div class="Rec-box Rec-money">
+        <ul class="Rec-money-list">
+          <li value="1" class="active default">1</li>
+          <li value="10">10</li>
+          <li value="20">20</li>
+          <li value="50">50</li>
+          <li value="100">100</li>
+          <li class="other-amount">
+            <input id="Num" type="tel" maxlength='5' placeholder="其他数量">
+          </li>
+        </ul>
+        <div class="sumShow">
+          <p>购买数量  <span class="color-red buyCount" >1</span>张</p>
+          <p>赠送微积分<span class="color-red sumCalculus" base-size="100">100</span></p>
+          <p>（<span class="color-red">新手特惠只可购买1次</span>）</p>
+        </div>
+      </div>
+    </div>
+    <!--支付-->
+    <div class="pay-bottomBox">
+      <div class="pay-bottom">
+        <button class="payMoney">立即支付</button>
+      </div>
+    </div>
+  </div>
+
+
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+  $(function(){
+    /*金额输入框*/
+    var RexM =  /^([1-9][0-9]*)$/;
+    var num;
+    document.getElementById('Num').addEventListener('input', function(e){
+      if ($(this).attr("maxlength") != null) {
+        if ($(this).val().length > parseInt($(this).attr("maxlength"))) {
+          $(this).val($(this).val().substr(0, parseInt($(this).attr("maxlength"))));
+        }
+      }
+      /*非数值型限制*/
+      if(!(RexM.test($(this).val()))){
+        $("#Num").val($(this).val().slice(0,$(this).length-2));
+      }
+    })
+
+    $(".Rec-money-list>li").not(".other-amount").on("click",function(){
+      $("#Num").val("");
+    })
+
+    $(".Rec-mode-list li").attr("value","0")
+    /*数量选择*/
+    $(".Rec-money-list li").on("click",function(){
+      if($(this).hasClass("other-amount")){
+        $(this).siblings().removeClass("active");
+      }else{
+        $(this).addClass("active").siblings().removeClass("active"); 
+        changeNum()    
+      }
+    })
+    changeNum();
+    $('#Num').on('blur', function(event) {
+      var num=$(this).val();
+      if(num.length<=0){
+        $(".default").addClass('active');
+        changeNum();
+      }else{
+        $('.buyCount').html(num);
+        var base=$('.sumCalculus').attr('base-size');
+        $('.sumCalculus').html(num*base);
+      }
+    });
+    //根据选择的数量算总数
+    function changeNum(){
+      $(".Rec-money-list li").each(function(){
+        if($(this).hasClass("active")){
+          var num=$(this).attr('value');
+          $('.buyCount').html(num);
+          var base=$('.sumCalculus').attr('base-size');
+          $('.sumCalculus').html(num*base);
+        }
+      });
+    }
+
+    $('.payMoney').on('click', function(event) {
+      var amount=$('.buyCount').text();
+      console.log(amount);
+    });
+  })
+</script>
+</body>
+</html>

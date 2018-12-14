@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>获取微积分</title>
+  <meta charset="UTF-8">
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="full-screen" content="yes">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="browsermode" content="application">
+  <meta name="x5-page-mode" content="app">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/rem.js"></script>
+</head>
+<body>
+  <div class="calculusBox">
+    <div class="title">
+      <img src="images/icon-close.png" alt="">
+    </div>
+    <div class="calculusMain">
+      <img class="main-bg" src='images/main-bg.png' alt="">
+      <div class="postionBox">
+        <div class="proInfo">
+          <div class="proInfo-left">
+            <img src="images/pro.jpg" alt="">
+          </div>
+          <div class="proInfo-right">
+            <p class="proPrice">价格：<span>11</span></p>
+            <p class="color-brown">优众网专属优惠券，购买优众网商品时使用，可抵扣10元。（团购、折扣商品不可使用）。</p>
+            <p class="color-black">每张赠送<span class="color-red">100</span>微积分</p>
+          </div>        
+        </div>
+        <div class=" Rec-money">
+          <ul class="Rec-money-list">
+            <li value="1" class="active default">1</li>
+            <li value="10">10</li>
+            <li value="20">20</li>
+            <li value="50">50</li>
+            <li value="100">100</li>
+            <li class="other-amount">
+              <input id="Num" type="tel" maxlength='5' placeholder="其他数量">
+            </li>
+          </ul>
+          <div class="sumShow">
+            <p>购买数量  <span class="color-red buyCount" >1</span>张</p>
+            <p>赠送微积分<span class="color-red sumCalculus" base-size="100">100</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="CalbtnBox">
+        <button class="Calbtn">前往优众支付</button>
+      </div>
+    </div>
+  </div>
+
+
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+  $(function(){
+    /*金额输入框*/
+    var RexM =  /^([1-9][0-9]*)$/;
+    var num;
+    document.getElementById('Num').addEventListener('input', function(e){
+      if ($(this).attr("maxlength") != null) {
+        if ($(this).val().length > parseInt($(this).attr("maxlength"))) {
+          $(this).val($(this).val().substr(0, parseInt($(this).attr("maxlength"))));
+        }
+      }
+      /*非数值型限制*/
+      if(!(RexM.test($(this).val()))){
+        $("#Num").val($(this).val().slice(0,$(this).length-2));
+      }
+    })
+
+    $(".Rec-money-list>li").not(".other-amount").on("click",function(){
+      $("#Num").val("");
+    })
+
+    $(".Rec-mode-list li").attr("value","0")
+    /*数量选择*/
+    $(".Rec-money-list li").on("click",function(){
+      if($(this).hasClass("other-amount")){
+        $(this).siblings().removeClass("active");
+      }else{
+        $(this).addClass("active").siblings().removeClass("active"); 
+        changeNum()    
+      }
+    })
+    changeNum();
+    $('#Num').on('blur', function(event) {
+      var num=$(this).val();
+      if(num.length<=0){
+        $(".default").addClass('active');
+        changeNum();
+      }else{
+        $('.buyCount').html(num);
+        var base=$('.sumCalculus').attr('base-size');
+        $('.sumCalculus').html(num*base);
+      }
+    });
+    //根据选择的数量算总数
+    function changeNum(){
+      $(".Rec-money-list li").each(function(){
+        if($(this).hasClass("active")){
+          var num=$(this).attr('value');
+          $('.buyCount').html(num);
+          var base=$('.sumCalculus').attr('base-size');
+          $('.sumCalculus').html(num*base);
+        }
+      });
+    }
+
+    $('.payMoney').on('click', function(event) {
+      var amount=$('.buyCount').text();
+      console.log(amount);
+    });
+  })
+</script>
+</body>
+</html>

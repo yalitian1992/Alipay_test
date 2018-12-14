@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>用户版-优惠券购买</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="userCheap-box">
+        <div class="header">
+            <img src="images/icon-Arrow.png" alt="">
+            <p>优众特惠优惠券</p>
+        </div>
+        <div class="U-rec-box cheapInfo-box">
+            <div class="cheapInfo">
+                <div class="cheapInfo-right">
+                    <p class="cheapTic color-white">5元抵扣券<span>￥1</span></p>
+                    <p class="cheapUse color-white">满100可使用</p>
+                    <p class="cheapTip color-light-brown">限价商品不可使用，每件商品只可使用1张优惠券</p>
+                </div>
+            </div>
+        </div>
+        <div class="U-rec-box U-rec-money">
+            <h4>购买数量</h4>
+            <ul class="U-rec-money-list">
+                <li value="10"><span>10</span></li>
+                <li value="50"><span>50</span></li>
+                <li value="100"><span>100</span></li>
+                <li value="300"><span>300</span></li>
+                <li value="500"><span>500</span></li>
+                <li class="U-other-amount">
+                    <input id="Num" type="tel" placeholder="其他数量" onfocus="this.placeholder=''" onblur="this.placeholder='其他数量'">
+                </li>
+            </ul>
+        </div>
+        <!--结算-->
+        <div class="account-box">
+            <div class="account-left">
+                <p class="total">金额总计:<span class="Money color-purple">￥500</span></p>
+                <p class="extra color-purple">赠<span class="giveMoney extra-icon">50000</span></p>
+            </div>
+            <button class="account-btn">结算</button>
+        </div>
+    </div>
+
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/rem.js"></script>
+<script>
+    $(function () {
+        /*金额输入框*/
+        var RexM =  /^([1-9][0-9]*)$/;
+
+        document.getElementById('Num').addEventListener('input', function(e){
+//            if ($(this).attr("maxlength") != null) {
+//                if ($(this).val().length > parseInt($(this).attr("maxlength"))) {
+//                    $(this).val($(this).val().substr(0, parseInt($(this).attr("maxlength"))));
+//                    $(this).val(99999);
+//                }
+              if($(this).val()>99999)
+              {
+                $(this).val(99999);
+              }
+//            }
+            /*非数值型限制*/
+            if(!(RexM.test($(this).val()))){
+                $("#Num").val($(this).val().slice(0,$(this).length-2));
+            }
+        })
+
+        $(".U-rec-money-list>li").not(".U-other-amount").on("click",function(){
+            $("#Num").val("");
+            /*结算*/
+            var cheapNum = $(this).attr("value");
+            $(".Money").text("￥" + cheapNum);
+            $(".giveMoney").text(100*cheapNum);
+        })
+
+        $("#Num").blur(function () {
+            console.log(1111111);
+            $(".Money").text("￥" + $(this).val());
+            $(".giveMoney").text(100*$(this).val());
+        })
+
+        $(".U-rec-mode-list li").attr("value","0")
+        /*金额选择*/
+        $(".U-rec-money-list li").on("click",function(){
+            if($(this).hasClass("U-other-amount")){
+                $(this).siblings().removeClass("active");
+            }else{
+                $(this).addClass("active").siblings().removeClass("active");
+            }
+
+        })
+
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+    <title>支付</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+	  <meta http-equiv="X-UA-Compitable" content="IE=edge">
+	  <link rel="stylesheet" href="css/style.css">
+	</head>
+  </head>
+  <body>
+  	<div class="payBox">
+  		<div class="header">
+  			<img src="images/icon-Arrow.png" alt="">
+  			<p>获取微积分</p>
+  		</div>
+  		<div class="pay-main">
+  			<div class="main-top">
+  				<div class="main-Tleft">
+  					<p>已为您自动登陆绑定优众网账号</p>
+  					<p>18954521454</p>
+  				</div>
+  				<a href="javascript:void(0);">
+  					<span>更换号码</span>
+  					<img src="images/icon-r.png" alt="">
+  				</a>
+  			</div>
+  			<!--订单信息-->
+  			<div class="main-center">
+  				<div class="OrderInfo">
+  					<div class="Order-left">
+  						<img src="images/pro.jpg" alt="">
+  					</div>
+  					<div class="Order-center">
+  						<p>优众优惠券优众优惠券优众优惠券优众优惠券优众优惠券</p>
+  						<p>
+  							<span>￥<i>1</i></span>
+  						</p>
+  						<p>赠送微积分<span>2000</span></p>
+  					</div>
+  					<div class="Order-right">
+  						X<span>20</span>
+  					</div>
+  				</div>
+  			</div>
+  			<!--支付方式-->
+  			<div class="Rec-box Rec-mode">
+  			  <p>支付方式</p>
+  			  <ul class="Rec-mode-list">
+  			    <li class="mode-list-box Rec-wechat" value="1">
+  			      <div class="fl"></div>
+  			      <div class="fc">
+  			        <p>微信支付</p>
+  			      </div>
+  			      <div class="fr"><span class="opt selected"></span></div>
+  			    </li>
+  			    <li class="mode-list-box Rec-alipay">
+  			      <div class="fl"></div>
+  			      <div class="fc">
+  			        <p>支付宝</p>
+  			      </div>
+  			      <div class="fr"><span class="opt"></span></div>
+  			    </li>
+  			    <li class="mode-list-box Rec-card">
+  			      <div class="fl"></div>
+  			      <div class="fc">
+  			        <p>银联支付</p>
+  			      </div>
+  			      <div class="fr"><span class="opt"></span></div>
+  			    </li>
+  			  </ul>
+  			</div>
+  		</div>
+  		<!--底部支付-->
+  		<div class="pay-bottomBox">
+  			<div class="pay-bottom">
+  				<p>总额：￥<span>2310000000</span></p>
+  				<button>立即支付</button>
+  			</div>
+  		</div>
+  		<!--支付浮层-->
+  		<div class="layerBox display">
+  			<div class="layerback">
+  				<div class="layer">
+  					<p>是否已完成支付</p>
+  					<div class="btn">
+  						<button>支付遇到问题</button>
+  						<button>完成支付</button>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </body>
+  <script src="js/jquery-1.11.3.js"></script>
+  <script>
+  	$(function(){
+  		/*支付方式勾选*/
+  		$(".Rec-mode-list li").on("click",function(){
+  		  var Opt = $(this).find(".opt");
+  		  Opt.toggleClass("selected");
+  		  if(Opt.hasClass("selected")){
+  		    $(this).attr("value","1").siblings().attr("value","0");
+  		  }else{
+  		    $(this).attr("value","0");
+  		  }
+  		  $(".Rec-mode-list li[value='0']").find(".opt").removeClass("selected");
+  		})
+  		$('body').on('click', '.layerBox', function(event) {
+  			$(this).hide();
+  		});
+  		$('body').on('click', '.layer,.btn button', function(event) {
+  			event.stopPropagation();
+  			
+  		});
+  	})
+  </script>
+</html>
